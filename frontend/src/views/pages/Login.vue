@@ -43,6 +43,11 @@
                         {{ loading ? 'Logging...' : 'Login' }}
                       </CButton>
                     </CCol>
+                    <CCol :xs="6" class="text-end">
+                      <CButton color="secondary" class="px-4" :disabled="loading" type="button" variant="outline"   @click="router.push({ path: '/register' })">
+                        Sign Up
+                      </CButton>
+                    </CCol>
                   </CRow>
                 </CForm>
                 <div class="text-center mt-3">

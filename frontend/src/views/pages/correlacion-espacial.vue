@@ -8,7 +8,7 @@
         <CCardBody>
           <div class="mb-4">
             <CFormLabel for="idSelect">Selecciona idPuntoTemperatura</CFormLabel>
-            <CFormSelect id="idSelect" v-model="selectedId" @change="fetchCorrelacion">
+            <CFormSelect id="idSelect" v-model="selectedId">
               <option v-for="id in ids" :key="id" :value="id">
                 {{ id }}
               </option>
@@ -42,24 +42,30 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue' // Importa watch para observar cambios
 import { CRow, CCol, CCard, CCardBody, CCardHeader, CFormSelect, CFormLabel, CTable, CTableHead, CTableRow, CTableHeaderCell, CTableBody, CTableDataCell } from '@coreui/vue'
 
 const ids = [1, 2, 3, 4, 5] // Puedes cambiar los ids disponibles aquí
-const selectedId = ref(ids[0])
-const correlaciones = ref([])
-const baseUrl = import.meta.env.VITE_BASE_URL
-const fetchCorrelacion = async () => {
+const selectedId = ref(ids[0]) // ID seleccionado
+const correlaciones = ref([]) // Datos de correlaciones
+const baseUrl = import.meta.env.VITE_BASE_URL // URL base de la API
+
+const fetchCorrelacion = async () => { // Función para obtener correlaciones
   try {
-    const res = await fetch(`${baseUrl}/api/puntos/correlacion?idPuntoTemperatura=${selectedId.value}`)
-    if (!res.ok) throw new Error('Error en la petición')
-    correlaciones.value = await res.json()
+    const res = await fetch(`${baseUrl}/api/puntos/correlacion?idPuntoTemperatura=${selectedId.value}`) // Llama a la API con el ID seleccionado
+    if (!res.ok) throw new Error('Error en la petición') // Manejo de errores
+    correlaciones.value = await res.json() // Almacena la respuesta en correlaciones
   } catch (e) {
-    correlaciones.value = []
+    correlaciones.value = [] // Si hay un error, establece correlaciones como un array vacío
   }
 }
 
-onMounted(() => {
-  fetchCorrelacion()
+onMounted(() => { // Al montar el componente
+  fetchCorrelacion() // Llama a la función para obtener correlaciones
+})
+
+// Observa cambios en selectedId y llama a fetchCorrelacion cuando cambie
+watch(selectedId, (newId) => {
+  fetchCorrelacion() // Llama a la función para obtener correlaciones con el nuevo ID
 })
 </script>

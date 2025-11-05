@@ -3,11 +3,16 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 
 const routes = [
-  // Login fuera del layout
+  // Login y register fuera del layout
   {
     path: '/',
     name: 'Login',
     component: () => import('@/views/pages/Login.vue')
+  },
+   {
+    path: '/register',
+    name: 'register',
+    component: () => import('@/views/pages/Register.vue')
   },
   // Rutas con layout
   {

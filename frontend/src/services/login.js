@@ -14,12 +14,19 @@ class AuthService {
     }
     return data // Devuelve los datos completos de la respuesta (puede incluir usuario, roles, etc.)
   }
-
+  // Logout solo en frontend: limpia el token local y elimina el header Authorization de axios
+  logout() {
+    localStorage.removeItem(TOKEN_KEY) // Elimina el token del localStorage
+    if (apiClient?.defaults?.headers?.common) {
+      delete apiClient.defaults.headers.common['Authorization'] // Quita el header Authorization por defecto de Axios
+    }
+  }
 
   async register(request) { // Método asíncrono para registrar un nuevo usuario
     const { data } = await apiClient.post("/auth/signup", request) // Envía POST a /auth/signup con los datos de registro
     return data // Devuelve la respuesta del backend (confirmación, usuario creado, etc.)
   }
+
 
 }
 

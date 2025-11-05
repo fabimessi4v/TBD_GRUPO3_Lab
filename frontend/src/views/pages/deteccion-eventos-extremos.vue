@@ -38,7 +38,7 @@ const baseUrl = import.meta.env.VITE_BASE_URL
 
 const fetchEventos = async () => {
   try {
-    const res = await fetch(`${baseUrl}/mediciones/eventos-extremos-temperatura`)
+    const res = await fetch(`${baseUrl}/api/mediciones/eventos-extremos-temperatura`)
     if (!res.ok) throw new Error('Error en la petición')
     eventos.value = await res.json()
   } catch (e) {
