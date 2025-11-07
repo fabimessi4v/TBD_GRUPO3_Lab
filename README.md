@@ -33,7 +33,7 @@ Se recomienda ejecutar los scripts de creación y poblamiento disponibles en el 
 ### 1️⃣ Backend (Spring Boot)
 
 ```bash
-cd backend
+cd climateViewer
 mvn spring-boot:run
 ````
 
@@ -59,7 +59,7 @@ La aplicación frontend estará disponible en:
 
 ```
 visualizador-datos-climaticos/
-├── backend/                 # Código fuente del backend (Spring Boot)
+├── climateViewer/                 # Código fuente del backend (Spring Boot)
 │   ├── src/                 # Controladores, servicios y repositorios
 │   ├── pom.xml              # Dependencias Maven
 │   └── ...
