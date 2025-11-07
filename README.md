@@ -24,7 +24,7 @@ Antes de ejecutar la aplicación, asegúrate de contar con:
 - **PostgreSQL** en ejecución
 
 La base de datos debe estar **creada y configurada previamente**, junto con sus tablas y datos iniciales.  
-Se recomienda ejecutar los scripts de creación y poblamiento disponibles en el directorio `/sql` del proyecto.
+Se recomienda ejecutar los scripts de creación y poblamiento disponibles en el directorio `/dataBase` del proyecto.
 
 ---
 
@@ -67,7 +67,7 @@ visualizador-datos-climaticos/
 │   ├── src/                 # Componentes y vistas
 │   ├── package.json         # Dependencias npm
 │   └── ...
-├── sql/                     # Scripts SQL de creación y poblamiento de la base de datos
+├── dataBase/                     # Scripts SQL de creación y poblamiento de la base de datos
 └── README.md                # Documentación principal del proyecto
 ```
 
