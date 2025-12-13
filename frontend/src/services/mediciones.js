@@ -1,7 +1,7 @@
-import api from '@/services/axios'
+import apiClient from '@/services/axios'
 
 export const getAnomaliasTemperatura = () =>
-  api.get("/mediciones/anomalias");
+  apiClient.get("/mediciones/anomalias");
 
 export const getTopVariacionTemperatura = () =>
-  api.get("/mediciones/top-variacion");
+  apiClient.get("/mediciones/top-variacion");
