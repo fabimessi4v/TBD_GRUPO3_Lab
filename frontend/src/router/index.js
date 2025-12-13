@@ -58,6 +58,19 @@ const routes = [
         path: '/georreferencia',
         name: 'Georreferencia',
         component: () => import('@/views/pages/Georreferencia.vue')
+      },
+      
+      {
+        path: '/anomalia-temperatura',
+        name: 'AnomaliaTemperatura',
+        component: () => import('@/views/pages/AnomaliaDeTemperatura.vue')
+
+      },
+
+      {
+        path: '/variacion-temperatura',
+        name: 'VariacionTemperatura',
+        component: () => import('@/views/pages/VariacionDeTemperatura.vue')
       }
     ]
   }

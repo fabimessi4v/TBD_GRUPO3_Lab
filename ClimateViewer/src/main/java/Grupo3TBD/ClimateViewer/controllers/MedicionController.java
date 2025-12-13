@@ -1,7 +1,9 @@
 package Grupo3TBD.ClimateViewer.controllers;
 
+import Grupo3TBD.ClimateViewer.DTO.AnomaliaTemperaturaDTO;
 import Grupo3TBD.ClimateViewer.DTO.EventoExtremoDTO;
 import Grupo3TBD.ClimateViewer.DTO.TendenciaMensualDTO;
+import Grupo3TBD.ClimateViewer.DTO.VariacionTemperaturaDTO;
 import Grupo3TBD.ClimateViewer.repository.MedicionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +35,16 @@ public class MedicionController {
             @RequestParam(required = false) String sensor,
             @RequestParam(required = false) String estacion) {
         return medicionRepository.obtenerTendenciaMensual(dataset, sensor, estacion);
+    }
+
+    @GetMapping("/anomalias")
+    public List<AnomaliaTemperaturaDTO> anomalias() {
+        return medicionRepository.findAnomaliaTemperaturaPorPunto();
+    }
+
+    @GetMapping("/top-variacion")
+    public List<VariacionTemperaturaDTO> topVariacion() {
+        return medicionRepository.findTop10MayorVariacionTemperatura5Anios();
     }
 
 

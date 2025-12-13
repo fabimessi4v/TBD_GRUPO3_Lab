@@ -1,9 +1,7 @@
 package Grupo3TBD.ClimateViewer.repository;
 
 
-import Grupo3TBD.ClimateViewer.DTO.CorrelacionDTO;
-import Grupo3TBD.ClimateViewer.DTO.EventoExtremoDTO;
-import Grupo3TBD.ClimateViewer.DTO.TendenciaMensualDTO;
+import Grupo3TBD.ClimateViewer.DTO.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -98,4 +96,60 @@ public class MedicionRepository {
                 )
         );
     }
+
+    public List<AnomaliaTemperaturaDTO> findAnomaliaTemperaturaPorPunto() {
+        String sql = """
+        SELECT
+          m.idpunto,
+          (AVG(m.valor) FILTER (WHERE m.fechahora >= CURRENT_DATE - INTERVAL '1 year')
+           - AVG(m.valor)) AS anomalia
+        FROM mediciones m
+        INNER JOIN puntosmedicion p ON m.idpunto = p.idpunto
+        WHERE p.tiposensor = 'Termómetro'
+        GROUP BY m.idpunto
+        HAVING COUNT(*) FILTER (WHERE m.fechahora >= CURRENT_DATE - INTERVAL '1 year') > 0
+        ORDER BY anomalia DESC
+        """;
+
+        return jdbcTemplate.query(sql, (rs, rowNum) ->
+                new AnomaliaTemperaturaDTO(
+                        rs.getInt("idpunto"),
+                        rs.getObject("anomalia") == null ? null : rs.getDouble("anomalia")
+                )
+        );
+    }
+
+
+    public List<VariacionTemperaturaDTO> findTop10MayorVariacionTemperatura5Anios() {
+        String sql = """
+        WITH t AS (
+          SELECT
+            m.idpunto,
+            STDDEV_SAMP(m.valor) OVER (PARTITION BY m.idpunto) AS desviacion_std
+          FROM mediciones m
+          INNER JOIN puntosmedicion p ON m.idpunto = p.idpunto
+          WHERE p.tiposensor = 'Termómetro'
+            AND m.fechahora >= CURRENT_DATE - INTERVAL '5 years'
+        )
+        SELECT DISTINCT
+          idpunto,
+          desviacion_std
+        FROM t
+        ORDER BY desviacion_std DESC NULLS LAST
+        LIMIT 10
+        """;
+
+        return jdbcTemplate.query(sql, (rs, rowNum) ->
+                new VariacionTemperaturaDTO(
+                        rs.getInt("idpunto"),
+                        rs.getObject("desviacion_std") == null ? null : rs.getDouble("desviacion_std")
+                )
+        );
+    }
+
+
+
+
+
+
 }

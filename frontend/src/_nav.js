@@ -46,7 +46,23 @@ export default [
     name: 'Georreferenciación',
     to: '/georreferencia',
     icon: 'cil-location-pin',
+  },
+
+  {
+    component: 'CNavItem',
+    name: 'VariacionTemperatura',
+    to: '/variacion-temperatura',
+    icon: 'cil-Chart',
+  },
+
+  {
+    component: 'CNavItem',
+    name: 'AnomaliaTemperatura',
+    to: '/anomalia-temperatura',
+    icon: 'cil-ChartLine',
   }
+
+
 ]
 
 
