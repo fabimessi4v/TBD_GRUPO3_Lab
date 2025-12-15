@@ -47,7 +47,7 @@ El servidor backend se ejecutará en:
 ```bash
 cd frontend
 npm install
-npm run serve
+npm run dev
 ```
 
 La aplicación frontend estará disponible en:
