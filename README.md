@@ -2,7 +2,7 @@
 # 🌎 Visualizador de Datos de Cambio Climático
 
 Aplicación web desarrollada para la **visualización y análisis de datos climáticos** provenientes de distintas fuentes y estaciones de medición.  
-Permite explorar variables como temperatura, concentración de CO₂ y nivel del mar a lo largo del tiempo y en diferentes ubicaciones.
+Permite explorar variables como temperatura, concentración de CO₂ y nivel del mar a lo largo del tiempo y en diferentes ubicaciones y areas.
 
 ---
 
